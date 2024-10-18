@@ -7,7 +7,7 @@
 роли доступные для создания пользователя: user, manager, crm-admin.
 
 * Переходим в директорию проекта: cd drftask
-* Шаблон команды для исполнения: python manage.py create_users <email> <password> <role>
+* Шаблон команды для исполнения: python manage.py create_users email password role
 
 p.s Таблица Role заполняется суперадмином, три роли: user, manager, crm-admin.
 Аватары для каждой роли находятся в media/avatars   
