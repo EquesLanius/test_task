@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-$0y3s7q6tlljmsj9d#t&q*b6rjzwbn#u4qeh7av1-_x@49$k@b
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0']
+ALLOWED_HOSTS = ['db', 'redis', 'localhost', '127.0.0.1', '0.0.0.0']
 
 
 # Application definition
@@ -78,12 +78,17 @@ WSGI_APPLICATION = 'drftask.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'postgres',
-        'USER': 'postgresUser',
-        'PASSWORD': 'postgresPW',
-        'HOST': 'localhost',
-        'PORT': '5455',
+        'ENGINE': 'django.db.backends.postgresql',
+        # 'NAME': 'postgres',
+        # 'USER': 'postgresUser',
+        # 'PASSWORD': 'postgresPW',
+        # 'HOST': 'localhost',
+        # 'PORT': '5455',
+        'NAME': os.environ.get("DB_NAME", "postgres"),
+        'USER': os.environ.get("DB_USER", "postgresUser"),
+        'PASSWORD': os.environ.get("DB_PASS", "postgresPW"),
+        'HOST': os.environ.get("DB_HOST", "localhost"),
+        'PORT': os.environ.get("DB_PORT", "5455")
     }
 }
 
@@ -133,6 +138,7 @@ MEDIA_URL = '/media/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-REDIS_HOST = 'localhost'
-REDIS_PORT = 6379
-
+# REDIS_HOST = 'localhost'
+# REDIS_PORT = 6379
+REDIS_HOST = os.environ.get('R_HOST', 'localhost')
+REDIS_PORT = os.environ.get('R_PORT', '6379')
